@@ -3,6 +3,16 @@ const Book = db.books;
 const Op = db.Sequelize.Op;
 
 exports.create = (req, res) => {
+    /* book.controller.create(req, res)
+    
+    Saves a new book
+    
+    req.body: {
+        title: book's title,
+        author: book's writer
+        cost: book's value
+    }
+    */
     if(!req.body.title) {
         res.status(400).send({
             message: "Content cannot be empty!"
@@ -30,10 +40,13 @@ exports.create = (req, res) => {
 }
 
 exports.findAll = (req, res) => {
-    const title = req.query.title;
-    var condition = title ? { title: {[Op.iLike]: `%${title}%`}} : null;
+    /* book.controller.findAll(req, res)
+    
+    Retrieves all the books
 
-    Book.findAll({where: condition})
+    */
+
+    Book.findAll()
         .then(data => {
             res.send(data);
         })
@@ -46,6 +59,13 @@ exports.findAll = (req, res) => {
 };
 
 exports.findOne = (req, res) => {
+    /* book.controller.findOne(req, res)
+    
+    Retrieves a book by it's ID
+    
+    /book/:id (where :id is the book's ID)
+
+    */
     const id = req.params.id;
 
     Book.findByPk(id)
@@ -60,6 +80,14 @@ exports.findOne = (req, res) => {
 };
 
 exports.update = (req, res) => {
+    /* book.controller.update(req, res)
+    
+    Updates a book by it's ID
+    
+    /book/:id (where :id is the book's ID)
+
+    */
+
     const id = req.params.id;
 
     Book.update(req.body, {
@@ -84,6 +112,13 @@ exports.update = (req, res) => {
 };
 
 exports.delete = (req, res) => {
+    /* book.controller.delete(req, res)
+    
+    Deletes a book by it's ID 
+    
+    /book/:id (where :id is the book's ID)
+
+    */
     const id = req.params.id;
 
     Book.destroy({
@@ -108,6 +143,11 @@ exports.delete = (req, res) => {
 };
 
 exports.deleteAll = (req, res) => {
+    /* book.controller.deleteAll(req, res)
+
+    Deletes all the books
+
+    */
     Book.destroy({
         where: {},
         truncate: false
@@ -124,6 +164,11 @@ exports.deleteAll = (req, res) => {
 };
 
 exports.findAllAvailable = (req, res) => {
+    /* book.controller.findAllAvailable(req, res)
+    
+    Retrieves all the available books
+
+    */
     Book.findAll({ where: { available: true } })
         .then(data => {
             res.send(data);

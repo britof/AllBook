@@ -2,6 +2,14 @@ const db = require('../models');
 const Client = db.clients;
 
 exports.create = (req, res) => {
+    /* client.controller.create(req, res)
+    
+    Saves a new client
+    
+    req.body: {
+        name: client's name
+    }
+    */
     if(!req.body.name) {
         res.status(400).send({
             message: "Content cannot be empty!"
@@ -11,7 +19,6 @@ exports.create = (req, res) => {
 
     const client = {
         name: req.body.name,
-        active: false
     };
 
     Client.create(client)
@@ -27,6 +34,15 @@ exports.create = (req, res) => {
 }
 
 exports.findOne = (req, res) => {
+    /* client.controller.create(req, res)
+    
+    Retrieves a client by it's ID
+    
+    req.body: {
+        id: client's ID
+    }
+    */
+
     const id = req.params.id;
 
     Client.findByPk(id)
@@ -40,8 +56,14 @@ exports.findOne = (req, res) => {
           });
 }
 
-exports.findAllActive = (req, res) => {
-    Client.findAll({where: {active: true}})
+exports.findAll = (req, res) => {
+    /* client.controller.create(req, res)
+    
+    Retrieves all the clients
+    
+    */
+
+    Client.findAll()
           .then(data => {
               res.send(data);
           })

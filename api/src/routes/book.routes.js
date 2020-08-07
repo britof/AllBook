@@ -15,10 +15,13 @@ module.exports = (app) => {
 
     router.post("/new-client", clients.create);
     router.get("/client/:id", clients.findOne);
-    router.get("/active-clients");
+    router.get("/all-clients", clients.findAll);
 
     router.post("/new-schedule", schedules.create);
     router.get("/schedule/:id", schedules.findOne);
+    router.get("/all-schedules", schedules.findAll);
+    router.delete("/delete-schedule", schedules.delete);
+    router.get("/dashboard", schedules.dashboard);
     router.get("/rents", schedules.findAllRents);
 
     app.use("/allbook-api", router);

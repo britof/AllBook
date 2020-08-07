@@ -5,9 +5,6 @@ module.exports = (sequelize, Sequelize) => {
         name: {
             type: Sequelize.STRING
         },
-        active: {
-            type: Sequelize.BOOLEAN
-        },
     });
 
     return Client;

@@ -1,10 +1,10 @@
 module.exports = (sequelize, Sequelize) => {
     const Schedule = sequelize.define("schedule", {
         book_id: {
-            type: Sequelize.STRING
+            type: Sequelize.INTEGER
         },
         client_id: {
-            type: Sequelize.STRING
+            type: Sequelize.INTEGER
         },
         rent: {
             type: Sequelize.BOOLEAN
